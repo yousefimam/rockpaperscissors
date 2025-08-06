@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let uscore = 0 , cscore = 0
+    playgame()
+
+    function playgame(){
+        let rounds = 5
+        while(rounds > 0){
+            playround()
+            rounds--
+        }
+        console.log("The Winner is" + uscore > cscore? "USSSEERRR" : "COMPUTTTEEERRR")
+    }
+    
+    function playround (){
+        let user = getuserinput().toLowerCase() , comp = RPC()
+        console.log("User input:" + user + " comp input: " + comp);
+        if (user == comp) console.log("DRAW");        
+        else if((user == "rock" && comp == "scissors") ||
+           (user == "scissors" && comp == "paper") ||
+            (user == "paper" && comp == "rock") )
+            uscore++
+        else 
+            cscore++
+        
+        console.log("Your Score is:" + uscore + " Comp Score is:" + cscore);
+        
+    }
+
+    function getuserinput() {
+        let ch = prompt("Choose .. Rock , Paper , Scissors")
+        return ch
+    }
+
+    //console.log(RPC());
+    
+    function RPC() {
+        let arr = ["rock" , "paper" , "scissors"]
+        let ind = Math.floor(Math.random() * 3)
+        return arr[ind]
+    }
+
+    
+</script>
+</html>
