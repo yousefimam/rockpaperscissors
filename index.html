@@ -6,50 +6,82 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <button class="r">Rock</button>
+    <button class="s">Scissors</button>
+    <button class="p">Paper</button>
+
+    <div>
+        <p class="uscore"></p>
+        <p class="cscore"></p>
+    </div>
+
+    <div class="res">
+
+    </div>
 </body>
 <script>
-    let uscore = 0 , cscore = 0
-    playgame()
+    let uscore = 0 , cscore = 0 , rounds = 5;
+    // playgame()
 
-    function playgame(){
-        let rounds = 5
-        while(rounds > 0){
-            playround()
-            rounds--
-            //initialization
+    // function playgame(){
+    //     let rounds = 5
+    //     while(rounds > 0){
+    //         playround()
+    //         rounds--
+    //         //initialization
+    //     }
+    //     console.log("The Winner is" + uscore > cscore? "USSSEERRR" : "COMPUTTTEEERRR")
+    // }
+
+    let uscPar = document.querySelector("p.uscore") , cscPar = document.querySelector("p.cscore") , resData = document.querySelector("div.res")
+    function updateData() {
+        uscPar.textContent = `User Score is: ${uscore}`
+        cscPar.textContent = `Computer Score is: ${cscore}`
+        if(rounds == 0){
+            resData.textContent = `The Winner ISSSS ${uscore > cscore? "UUUSSSEEERRR":"CCOOMMPPUUTTEERR"}`
         }
-        console.log("The Winner is" + uscore > cscore? "USSSEERRR" : "COMPUTTTEEERRR")
     }
-    
-    function playround (){
-        let user = getuserinput().toLowerCase() , comp = RPC()
+
+    let btns = document.querySelectorAll("button")
+    btns.forEach((btn) => {
+        btn.addEventListener("click" , () => {
+            console.log("WORRRKKK");
+            if(rounds > 0){
+                console.log(btn.textContent.toLowerCase());
+                playround(btn.textContent.toLowerCase())
+            }
+            updateData()
+            rounds--
+        })
+    })
+    function playround (user){
+        let comp = RPC()
         console.log("User input:" + user + " comp input: " + comp);
-        if (user == comp) console.log("DRAW");        
+        if (user == comp) console.log("DRAW");
         else if((user == "rock" && comp == "scissors") ||
            (user == "scissors" && comp == "paper") ||
             (user == "paper" && comp == "rock") )
             uscore++
-        else 
+        else
             cscore++
-        
+
         console.log("Your Score is:" + uscore + " Comp Score is:" + cscore);
-        
+
     }
 
-    function getuserinput() {
-        let ch = prompt("Choose .. Rock , Paper , Scissors")
-        return ch
-    }
+    // function getuserinput() {
+    //     let ch = prompt("Choose .. Rock , Paper , Scissors")
+    //     return ch
+    // }
 
     //console.log(RPC());
-    
+
     function RPC() {
         let arr = ["rock" , "paper" , "scissors"]
         let ind = Math.floor(Math.random() * 3)
         return arr[ind]
     }
 
-    
+
 </script>
 </html>
